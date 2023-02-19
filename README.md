@@ -30,26 +30,5 @@ TOKEN_SECRET=secret-token
 - use `npm run build` to build the project
 
 ## Test the App
-- add a `database.json` file with a `dev` mode and a `test` mode. for example:
-
-```
-{
-    "dev": {
-        "driver": "pg",
-        "host": {"ENV": "POSTGRES_HOST"},
-        "database": {"ENV": "POSTGRES_DB"},
-        "user": {"ENV": "POSTGRES_USER"},
-        "password": {"ENV": "POSTGRES_PASSWORD"}
-    },
-    
-    "test": {
-        "driver": "pg",
-        "host": {"ENV": "POSTGRES_HOST"},
-        "database": {"ENV": "POSTGRES_DB_TEST"},
-        "user": {"ENV": "POSTGRES_USER"},
-        "password": {"ENV": "POSTGRES_PASSWORD"}
-    }
-}
-```
 - use `npm run migration:db:test` to create the tables for your test database.
 - use `npm run test` to perform all test cases.
