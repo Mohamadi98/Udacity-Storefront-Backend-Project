@@ -24,6 +24,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create `/users` [POST] [token required]
 - Update `/users` [PUT] [token required]
 - Delete `/users/:id` [DELETE] [token required]
+- Show `/getcurrentorders/:id` [GET] [TOKEN REQUIRED]
+- Create `/productsorder` [POST] [token required]
 
 #### Products Order List
 - Index `/productsorder` [GET] [token required]
@@ -54,8 +56,15 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status varchar(50),
-    quantity integer,
-    product_id bigint REFERENCES product(id),
     user_id bigint REFERENCES users(id)
+);
+```
+#### order_products
+```
+CREATE TABLE order_products (
+    id SERIAL PRIMARY KEY,
+    order_id bigint REFERENCES orders(id),
+    product_id bigint REFERENCES product(id),
+    quantity numeric
 );
 ```
