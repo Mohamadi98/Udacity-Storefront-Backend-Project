@@ -1,34 +1,42 @@
 # Storefront Backend Project
 
-## Getting Started
+## Database Creation
+- first you will need to create a `store database`, also create another database for testing purposes `store_test`.<br>
+`CREATE DATABASE store;`<br>
+`CREATE DATABASE store_test;`
 
-- First you will need to add a `.env` file in the root directory and add important variables. The below example is all the variable needed.
+## .env File
+- you will need to add a `.env` file in the root directory and add important variables. The below example is all the variable needed.
 
 ```
+# DB variables
 POSTGRES_HOST= localhost
-POSTGRES_DB= add-your-database-name
-POSTGRES_DB_TEST= add-your-test-database-name
+POSTGRES_DB= store
+POSTGRES_DB_TEST= store_test
 POSTGRES_USER= postgres
-POSTGRES_PASSWORD= add-your-database-password
+POSTGRES_PASSWORD= # type your postgresql password
 ENV=dev
 PORT=3000
+
+# Bcrypt variables
 PEPPER=your-secret-password
 SALT_ROUNDS=10
+
+# JWT variables
 TOKEN_SECRET=secret-token
 ```
 
-## Database Creation
-- This project assumes that you already have Postgresql installed on your local device. Before you start you will to create a database for the project development (please make sure to name the database the same name provided in the .env file). After that you will also need to create another database for the testing.
-- My naming suggestions, store & store_test.
+## Ports
+- the project runs on localhost. the server runs on `Port=3000`, and the database on `Port=5432`
 
 ## Project Setup
 - run `npm install` to install all the required dependencies.
-- run `npm run migration:db` script to create database tables.
+- run `npm run migration:db` script to create database tables and relationships.
 
 ## Start the App
 - use `npm run start` to start the server.
-- use `npm run build` to build the project
+- use `npm run build` to build the project.
 
 ## Test the App
-- use `npm run migration:db:test` to create the tables for your test database.
+- use `npm run migration:db:test` to create the tables and relationships for your test database.
 - use `npm run test` to perform all test cases.
