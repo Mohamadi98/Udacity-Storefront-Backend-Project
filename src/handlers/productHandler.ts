@@ -61,6 +61,7 @@ const update = async (
   try {
     if (
       req.body.name === undefined ||
+      req.body.category === undefined ||
       req.body.price === undefined ||
       req.body.id === undefined
     ) {

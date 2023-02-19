@@ -14,8 +14,12 @@ describe("testing product model CRUD operations", (): void => {
     const conn = await client.connect();
     const sql = "DELETE FROM product;";
     const sql2 = "ALTER SEQUENCE product_id_seq RESTART WITH 1;";
+    const sql3 = "DELETE FROM users;";
+    const sql4 = "ALTER SEQUENCE users_id_seq RESTART WITH 1;";
     await conn.query(sql);
     await conn.query(sql2);
+    await conn.query(sql3);
+    await conn.query(sql4);
     conn.release();
   });
 

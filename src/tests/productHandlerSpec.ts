@@ -37,8 +37,12 @@ describe("Suite: testing product endpoint", (): void => {
     const conn = await client.connect();
     const sql = "DELETE FROM product;";
     const sql2 = "ALTER SEQUENCE product_id_seq RESTART WITH 1;";
+    const sql3 = "DELETE FROM users;";
+    const sql4 = "ALTER SEQUENCE users_id_seq RESTART WITH 1;";
     await conn.query(sql);
     await conn.query(sql2);
+    await conn.query(sql3);
+    await conn.query(sql4);
     conn.release();
   });
 
@@ -64,19 +68,7 @@ describe("Suite: testing product endpoint", (): void => {
     expect(response.status).toBe(200);
   });
 
-  it("products delete endpoint, should reject as it requires a token", async (): Promise<void> => {
-    const response = await request.delete(`/products/${productID}`);
-    expect(response.status).toBe(400);
-  });
-
-  it("testing products delete endpoint", async (): Promise<void> => {
-    const response = await request
-      .delete(`/products/${productID}`)
-      .set("Authorization", "Bearer " + token);
-    expect(response.status).toBe(200);
-  });
-
-  it("products update endpoint, should reject as it requires a token", async (): Promise<void> => {
+ it("products update endpoint, should reject as it requires a token", async (): Promise<void> => {
     const response = await request.put(`/products`).send({
       name: "testproduct3",
       price: 300,
@@ -95,6 +87,18 @@ describe("Suite: testing product endpoint", (): void => {
         category: "skin care",
         id: 1,
       })
+      .set("Authorization", "Bearer " + token);
+    expect(response.status).toBe(200);
+  });
+
+  it("products delete endpoint, should reject as it requires a token", async (): Promise<void> => {
+    const response = await request.delete(`/products/${productID}`);
+    expect(response.status).toBe(400);
+  });
+
+  it("testing products delete endpoint", async (): Promise<void> => {
+    const response = await request
+      .delete(`/products/${productID}`)
       .set("Authorization", "Bearer " + token);
     expect(response.status).toBe(200);
   });

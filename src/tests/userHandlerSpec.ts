@@ -49,18 +49,6 @@ describe("Suite: testing user endpoint", (): void => {
     expect(response.status).toBe(200);
   });
 
-  it("delete endpoint, should reject as it requires a token", async (): Promise<void> => {
-    const response = await request.delete(`/users/${userID}`);
-    expect(response.status).toBe(400);
-  });
-
-  it("testing delete endpoint", async (): Promise<void> => {
-    const response = await request
-      .delete(`/users/${userID}`)
-      .set("Authorization", "Bearer " + token);
-    expect(response.status).toBe(200);
-  });
-
   it("update endpoint, should reject as it requires a token", async (): Promise<void> => {
     const response = await request.put(`/users`).send({
       firstName: "updatedtestname",
@@ -84,9 +72,23 @@ describe("Suite: testing user endpoint", (): void => {
     expect(response.status).toBe(200);
   });
 
+  it("delete endpoint, should reject as it requires a token", async (): Promise<void> => {
+    const response = await request.delete(`/users/${userID}`);
+    expect(response.status).toBe(400);
+  });
+
+  it("testing delete endpoint", async (): Promise<void> => {
+    const response = await request
+      .delete(`/users/${userID}`)
+      .set("Authorization", "Bearer " + token);
+    expect(response.status).toBe(200);
+  });
+
   it("testing the products order list", async (): Promise<void> => {
     const response = await request
       .get("/productsorder")
-      .set("Authprization", "Bearer " + token);
+      .set("Authorization", "Bearer " + token);
+
+      expect(response.status).toBe(200);
   });
 });
