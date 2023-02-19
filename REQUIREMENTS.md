@@ -5,37 +5,57 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index `/products` [GET]
+- Show `/products/:id` [GET]  
+- Create `/products` [POST] [token required]
+- Update `/products` [PUT] [token required]
+- Delete `/products` [DELETE] [token required]
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index `/users` [GET]
+- Show `/users/:id` [GET]
+- Create `/users` [POST]
+- Update `/users` [PUT] [token required]
+- Delete `/users/:id` [DELETE] [token required]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Index `/orders` [GET] [token required]
+- Show `/users/:id` [GET] [token required]
+- Create `/users` [POST] [token required]
+- Update `/users` [PUT] [token required]
+- Delete `/users/:id` [DELETE] [token required]
+
+#### Products Order List
+- Index `/productsorder` [GET] [token required]
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+```
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    name varchar(100),
+    price numeric,
+    category varchar(50)
+);
+```
 
 #### User
-- id
-- firstName
-- lastName
-- password
+```
+CREATE TABLE users (
+ id SERIAL PRIMARY KEY, 
+ firstName varchar(100), 
+ lastName varchar(100), 
+ password varchar(255)
+ );
+```
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+```
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status varchar(50),
+    quantity integer,
+    product_id bigint REFERENCES product(id),
+    user_id bigint REFERENCES users(id)
+);
+```
